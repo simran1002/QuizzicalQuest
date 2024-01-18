@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+}
+
+.quiz-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Welcome, User!</h1>
+    <div id="quizzesContainer">
+        <!-- Quiz items will be added here dynamically -->
+    </div>
+</div>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Sample quiz data
+    const quizzes = [
+        { id: 1, question: 'What is the capital of France?', answer: 'Paris' },
+        { id: 2, question: 'Which planet is known as the Red Planet?', answer: 'Mars' },
+        // Add more quiz items as needed
+    ];
+
+    const quizzesContainer = document.getElementById('quizzesContainer');
+
+    // Display quizzes on the page
+    quizzes.forEach(quiz => {
+        const quizItem = createQuizItem(quiz);
+        quizzesContainer.appendChild(quizItem);
+    });
+
+    function createQuizItem(quiz) {
+        const quizItem = document.createElement('div');
+        quizItem.classList.add('quiz-item');
+        quizItem.id = `quiz-${quiz.id}`;
+        quizItem.innerHTML = `
+            <p><strong>Question:</strong> ${quiz.question}</p>
+            <p><strong>Answer:</strong> ${quiz.answer}</p>
+            <button class="delete-btn" onclick="deleteQuiz(${quiz.id})">Delete Quiz</button>
+        `;
+        return quizItem;
+    }
+
+    window.deleteQuiz = function (quizId) {
+        const quizItem = document.getElementById(`quiz-${quizId}`);
+        if (quizItem) {
+            quizItem.remove();
+        }
+    };
+});
+
+
+</script>
+</body>
+</html>
