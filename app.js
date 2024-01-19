@@ -15,7 +15,7 @@ app.use(express.static(__dirname));
 
 // Check for MongoDB connection errors
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.on('error', console.error.bind(console, 'Connection error:'));
 db.once('open', function () {
   //   console.log('Connected to MongoDB');
 });
@@ -67,7 +67,7 @@ app.post('/login', async (req, res) => {
       res.json({ success: true });
     } else {
       // Send error response
-      res.status(400).json({ error: 'Invalid credentials' });
+      res.status(400).json({ error: 'Invalid login credentials' });
     }
   } catch (error) {
     console.error('Error during login:', error);
